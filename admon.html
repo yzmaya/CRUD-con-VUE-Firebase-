@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Bootstrap Theme Company Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="CSS/estilo.css">
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.8/vue.min.js"></script>
+
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+
+
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#myPage">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="index.html" target="_blank">WEB</a></li>
+    <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> MI CUENTA <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#" style=" background-color: black;"><span class="glyphicon glyphicon-user"></span> REGISTRARSE</a></li>
+      <li><a href="#" style=" background-color: black;"><span class="glyphicon glyphicon-log-in"></span> INICIAR SESIÓN</a></li>
+        </ul>
+      </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+<!-- Container (About Section) -->
+<div id="about" class="container-fluid">
+  <div class="row">
+<h1>Agregar a Catalogo</h1>
+<div class="col-sm-4" id="app">
+<form class="form-horizontal" action="" @submit.prevent="enviarMensaje">
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2">Categoria:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Basico / De Lujo" v-model="categoria">
+      </div>
+    </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2">Producto:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Nombre Completo del Producto" v-model="nombre">
+      </div>
+    </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2">Cantidad:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Cantidad de Piezas a Inventario" v-model="piezas">
+      </div>
+    </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2">Precio:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Precio" v-model="precio">
+      </div>
+    </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2">Detalles del Producto:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Peso, Medidas, Tipo de Material" v-model="detalles">
+      </div>
+    </div>
+    
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-success">Agregar</button>
+      </div>
+    </div>
+  </form>
+    <pre>{{$data}}</pre>
+    </div>
+  
+
+
+
+<!-- DIV DE INSTANCIA 2 DE VUE ++++++++++++++++++++++++++++++++++++++++++++++-->
+
+ <div class="col-sm-8" id="app2">
+      <h2>Base de Datos</h2>
+      <table class="table table-hover">
+    <thead>
+      <tr  class="info">
+        <th>Categoria</th>
+        <th>Nombre del Producto</th>
+        <th>Piezas</th>
+        <th>Precio</th>
+        <th>Detalles</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody v-for="mensaje in mensajes">
+      <tr>
+      	<td contenteditable="true" @blur="editarCategoria($event, mensaje.key)" id="test">{{mensaje.vcategoria}}</td>
+        <td contenteditable="true" @blur="editarNombre($event, mensaje.key)">{{mensaje.nombre}}</td>
+        <td contenteditable="true" @blur="editarPiezas($event, mensaje.key)">{{mensaje.piezas}}</td>
+        <td contenteditable="true" @blur="editarPrecio($event, mensaje.key)">{{mensaje.precio}}</td>
+        <td contenteditable="true" @blur="editarDetalles($event, mensaje.key)">{{mensaje.detalles}}</td>
+        <td><button @click="eliminarMensaje(mensaje.key)" class="glyphicon glyphicon-trash"></button></td>
+      </tr>
+      
+    </tbody>
+  </table>
+     <pre>{{$data}}</pre>
+     
+    </div>
+
+
+
+  </div>
+</div>
+
+
+<!-- 
+<div class="container-fluid bg-grey">
+  <div class="row">
+    <div class="col-sm-4">
+     
+    </div>
+    <div class="col-sm-8">
+      <h2>NUESTROS VALORES</h2><br>
+      <h4><strong>MISSION:</strong> Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+<footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p>Mi empresa Copyright 2017</p>
+</footer>
+
+
+
+<!-- AQUI EMPIEZA SCERIPT DE VUE AND FIREBASE-->
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBJDpf99Z0vZwWNOyuxXvxXp78VCw_R8uU",
+    authDomain: "api-nss.firebaseapp.com",
+    databaseURL: "https://api-nss.firebaseio.com",
+    projectId: "api-nss",
+    storageBucket: "api-nss.appspot.com",
+    messagingSenderId: "675426234514"
+  };
+  firebase.initializeApp(config);
+  const db = firebase.database();
+
+
+// ++++++++++++++++++++++++++ INSTANCIA 1 ++++++++++++++++++++++++++++++++++++++++++++++
+const vm =	 new Vue({
+		  	el: '#app',
+		  	data: {
+		  		categoria: null,
+		 		nombre: null,
+		 		piezas: 0,
+		 		precio: 0,
+		 		detalles: null,
+		 		mensajes: [],
+		  	},
+		  	methods: {
+		  		enviarMensaje(){
+		 			db.ref('/base')
+		 			.push({
+		 				categoria: this.categoria,
+		 				nombre: this.nombre,
+		 				piezas: this.piezas,
+		 				precio: this.precio,
+		 				detalles: this.detalles,
+		 				
+		 			})
+		 			.then((data) => {
+		 				//Aqui borro lo que tiene el formulario y envio a consola el key de firebase
+		 				this.categoria = '';
+		 				this.nombre = '';
+		 				this.piezas = '';
+		 				this.precio = '';
+		 				this.detalles = '';
+
+		 				console.log(data.key);
+		 			});
+
+		 		}
+		  	}
+	
+		  });
+
+// ++++++++++++++++++++++++++ INSTANCIA 2 ++++++++++++++++++++++++++++++++++++++++++++++
+const vm2 = new Vue({
+	el: '#app2',
+	created(){
+		  		db.ref('/base')
+		  			.on('value', snapshot => this.cargarMensajes(snapshot.val()))
+		  	},
+	data: {
+		mensajes: [],
+	},
+	methods: {
+		cargarMensajes(mensajes){
+		 			this.mensajes = [];
+		 				for (let key in mensajes){
+		 					
+		 					this.mensajes.push({
+		 						vcategoria: mensajes[key].categoria,
+		 						nombre: mensajes[key].nombre,
+		 						piezas: mensajes[key].piezas,
+		 						precio: mensajes[key].precio,
+		 						detalles: mensajes[key].detalles,
+		 						key: key,
+		 					});
+		 				}
+		 		},
+		 		editarCategoria(mensaje, key){
+		 			db.ref('/base/' + key).update({
+		 				categoria: mensaje.target.innerHTML,
+		 			});
+		 		},
+		 		editarNombre(mensaje, key){
+		 			db.ref('/base/' + key).update({
+		 				nombre: mensaje.target.innerHTML,
+		 			});
+		 		},
+		 		editarPiezas(mensaje, key){
+		 			db.ref('/base/' + key).update({
+		 				piezas: mensaje.target.innerHTML,
+		 			});
+		 		},
+		 		editarPrecio(mensaje, key){
+		 			db.ref('/base/' + key).update({
+		 				precio: mensaje.target.innerHTML,
+		 			});
+		 		},
+		 		editarDetalles(mensaje, key){
+		 			db.ref('/base/' + key).update({
+		 				detalles: mensaje.target.innerHTML,
+		 			});
+		 		},
+		 		eliminarMensaje(key){
+		 			if(confirm('seguro?'))
+		 				db.ref('/base/' + key).remove();
+		 		}
+	}
+});
+
+
+
+</script>
+
+
+<script type="text/javascript" src="JS/default.js"></script>
+<!-- esto funciona para usar la consola de vue-->
+<script src="https://unpkg.com/vue@2.5.8/dist/vue.js"></script>
+
+</body>
+</html>
